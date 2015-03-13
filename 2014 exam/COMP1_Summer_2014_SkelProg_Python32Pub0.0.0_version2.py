@@ -78,6 +78,13 @@ def DisplayMenu():
 def GetMenuChoice():
   Choice = input()
   print()
+  if Choice == "Q":
+    Choice = "q"
+
+  elif Choice == "Quit":
+    Choice = "q"
+  
+  
   return Choice
 
 def LoadDeck(Deck):
@@ -134,22 +141,32 @@ def GetPlayerName():
 
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  if Choice == "yes":
-    Choice = "y"
+  if Choice == "Y":
+    Choice =="y"
+    
   elif Choice == "Yes":
-    choice = "y"
-  elif Choice == "Y":
     Choice = "y"
-  elif Choice == "No":
-    Choice = "n"
-  elif Choice == "no":
-    Choice = "n"
+
+  elif Choice == "yes":
+    Choice = "y"
+
   elif Choice == "N":
     Choice = "n"
-  
-
     
+  elif Choice == "NO":
+    Choice = "n"
+    
+  elif Choice == "no":
+    Choice = "n"
+
+
+
+
+  
+  
   return Choice
+
+
 
 def DisplayEndOfGameMessage(Score):
   print()
@@ -198,6 +215,8 @@ def UpdateRecentScores(RecentScores, Score):
   RecentScores[Count].Name = PlayerName
   RecentScores[Count].Score = Score
 
+def save_game_choice():
+
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
@@ -220,10 +239,14 @@ def PlayGame(Deck, RecentScores):
     else:
       GameOver = True
   if GameOver:
+    
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
+    ##save_game_choice()
     UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
   else:
+    
     DisplayEndOfGameMessage(51)
+    ##save_game_choice()
     UpdateRecentScores(RecentScores, 51)
 
 if __name__ == '__main__':
