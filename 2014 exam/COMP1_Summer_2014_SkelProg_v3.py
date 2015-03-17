@@ -77,6 +77,10 @@ def DisplayMenu():
 
 def GetMenuChoice():
   Choice = input()
+  Choice = Choice.lower()
+  acceptable_values = ["quit", "q"]
+  if Choice in acceptable_values:
+    Choice = "q"
   print()
   return Choice
 
@@ -128,13 +132,30 @@ def IsNextCardHigher(LastCard, NextCard):
 
 def GetPlayerName():
   print()
-  PlayerName = input('Please enter your name: ')
+  name = False
+  while not name:
+    PlayerName = input('Please enter your name: ')
+    if PlayerName != "":
+      print("You need to enter a name!")
+      name = True      
+  
   print()
   return PlayerName
 
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  return Choice
+  
+  Choice = Choice.lower()
+  
+  accepted_value_for_yes = ["yes", "y"]
+  if Choice in accepted_value_for_yes:
+    Choice = "y"
+    
+  accepted_value_for_no = ["no", "n"]
+  if Choice in accepted_value_for_no:
+    Choice = "n"
+  return Choice 
+
 
 def DisplayEndOfGameMessage(Score):
   print()
@@ -165,6 +186,13 @@ def DisplayRecentScores(RecentScores):
   print('Press the Enter key to return to the main menu')
   input()
   print()
+
+def add_highscore_choice():
+  choice = input("Do you want to add your score to the high score table? (y or n): ")
+  #make a list of acceptable values
+  return choice
+    
+  
 
 def UpdateRecentScores(RecentScores, Score):
   PlayerName = GetPlayerName()
@@ -206,9 +234,12 @@ def PlayGame(Deck, RecentScores):
       GameOver = True
   if GameOver:
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
-    UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
+    choice = add_highscore_choice()
+    if choice == "y":
+      UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
   else:
     DisplayEndOfGameMessage(51)
+    #add_highscore_choice()
     UpdateRecentScores(RecentScores, 51)
 
 if __name__ == '__main__':

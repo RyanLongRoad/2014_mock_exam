@@ -77,6 +77,10 @@ def DisplayMenu():
 
 def GetMenuChoice():
   Choice = input()
+  Choice = Choice.lower()
+  acceptable_values = ["quit", "q"]
+  if Choice in acceptable_values:
+    Choice = "q"
   print()
   return Choice
 
@@ -134,7 +138,18 @@ def GetPlayerName():
 
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  return Choice
+  
+  Choice = Choice.lower()
+  
+  accepted_value_for_yes = ["yes", "y"]
+  if Choice in accepted_value_for_yes:
+    Choice = "y"
+    
+  accepted_value_for_no = ["no", "n"]
+  if Choice in accepted_value_for_no:
+    Choice = "n"
+  return Choice 
+
 
 def DisplayEndOfGameMessage(Score):
   print()
@@ -165,6 +180,8 @@ def DisplayRecentScores(RecentScores):
   print('Press the Enter key to return to the main menu')
   input()
   print()
+
+
 
 def UpdateRecentScores(RecentScores, Score):
   PlayerName = GetPlayerName()
@@ -209,6 +226,7 @@ def PlayGame(Deck, RecentScores):
     UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
   else:
     DisplayEndOfGameMessage(51)
+    
     UpdateRecentScores(RecentScores, 51)
 
 if __name__ == '__main__':
